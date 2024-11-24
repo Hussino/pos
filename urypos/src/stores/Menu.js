@@ -305,6 +305,8 @@ export const useMenuStore = defineStore("menu", {
       this.priority = true;
       this.displayAll = false;
       this.showAll = false;
+      this.searchTerm = "";
+      this.selectedCourse = "";
     },
     showModal(item) {
       this.showDialog = true;

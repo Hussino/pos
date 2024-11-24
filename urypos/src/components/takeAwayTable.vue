@@ -1,12 +1,12 @@
 <template>
-  <div class="flow-root">
+  <div class="flow-root mt-2 py-2">
     <div
       class="fixed inset-0 z-50 flex items-center justify-center bg-gray-300 bg-opacity-50 text-lg"
       v-if="this.invoiceData.isPrinting"
     >
       Printing Invoice
     </div>
-    <div class="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-5">
+    <div class="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8">
       <div
         w-full
         class="w-full max-w-sm rounded border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800"

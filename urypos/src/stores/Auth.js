@@ -155,7 +155,8 @@ export const useAuthStore = defineStore("auth", {
     },
     routeToHome() {
       var currentDomain = window.location.protocol + "//" + window.location.hostname;
-      window.location.href = currentDomain + "/app/";
+      // window.location.href = currentDomain + "/app/";
+      window.location.href = "/app";
     },
     
     isPosOpenChecking() {

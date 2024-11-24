@@ -10,6 +10,8 @@ import frappe from "./frappeSdk.js";
 
 export const useTableStore = defineStore("table", {
   state: () => ({
+    restaurant_name: null,
+    restaurant_image: null,
     tables: [],
     selectedTable: null,
     previousOrderdItem: [],
@@ -77,8 +79,12 @@ export const useTableStore = defineStore("table", {
     },
   },
   actions: {
-    fetchRoom() {
+    async fetchRoom () {
       this.selectedOption = "Table";
+      await this.call.get("ury.ury_pos.api.getRestaurantName").then((result) => {
+        this.restaurant_name = result.message.name;
+        this.restaurant_image = result.message.image;
+      });
       this.db
         .getDocList("URY Room", {
           fields: ["name", "branch"],

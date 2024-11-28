@@ -8,12 +8,16 @@ import resourceManager from "../../../doppio/libs/resourceManager";
 import call from "../../../doppio/libs/controllers/call";
 // import socket from "../../../doppio/libs/controllers/socket";
 import Auth from "../../../doppio/libs/controllers/auth";
-import { createPinia } from 'pinia'
+import { createPinia } from 'pinia';
 
 
-const pinia = createPinia()
+const pinia = createPinia();
 const app = createApp(App);
 const auth = reactive(new Auth());
+
+import { PerfectScrollbarPlugin } from 'vue3-perfect-scrollbar';
+import 'vue3-perfect-scrollbar/style.css';
+app.use(PerfectScrollbarPlugin)
 
 // Plugins
 app.use(router);

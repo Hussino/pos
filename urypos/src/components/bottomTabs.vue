@@ -4,18 +4,18 @@
         v-if="!this.tabClick.isLoginPage"
         id="tab"
     >
-        <div class="flex justify-between items-center h-full max-w-screen-2xl mx-auto px-4">
-            <div class="flex flex-col justify-center items-start">
+        <div class="grid grid-cols-3 gap-2 h-full max-w-screen-2xl mx-auto px-4">
+            <div class="col-span-1 flex flex-col justify-center items-start">
                 <p v-if="system_settings.restaurant_system_settings.show_branch_name" class="text-sm text-gray-600 dark:text-gray-300">{{ this.invoiceData.branch }}</p>
                 <p v-if="system_settings.restaurant_system_settings.show_user_name" class="text-sm text-gray-600 dark:text-gray-300">{{ this.auth.sessionUser }}</p>
             </div>
 
             <div
-                class="grid h-full font-medium"
+                class="grid h-full font-medium col-span-1 items-center justify-center"
                 :class="[
                     {
-                    'grid-cols-4': !auth.cashier,
-                    'grid-cols-5': auth.cashier,
+                    'grid-cols-2': !auth.cashier,
+                    'grid-cols-3': auth.cashier,
                     },
                 ]"
             >
@@ -49,13 +49,13 @@
                         'text-blue-600': this.tabClick.currentTab === '/Table',
                         },
                     ]"
-                    >Table</span
+                    >الطاولات</span
                     >
                 </router-link>
 
                 <router-link
                     :to="invoiceData.invoiceUpdating ? '#' : '/Menu'"
-                    class="group inline-flex flex-col items-center justify-center border-r border-gray-200 px-5 hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-800"
+                    class="group inline-flex flex-col items-center justify-center border-l border-gray-200 px-5 hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-800"
                     @click="this.tabClick.clickMenuTab()"
                 >
                     <svg
@@ -86,10 +86,10 @@
                         'text-blue-600': this.tabClick.currentTab === '/Menu',
                         },
                     ]"
-                    >Menu</span
+                    >الطلبات</span
                     ></router-link
                 >
-                <router-link
+                <!-- <router-link
                     :to="invoiceData.invoiceUpdating ? '#' : '/Customer'"
                     class="group inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800"
                     @click="!this.auth.cashier && this.tabClick.checkActiveTable()"
@@ -124,8 +124,8 @@
                     ]"
                     >Customer</span
                     ></router-link
-                >
-                <router-link
+                > -->
+                <!-- <router-link
                     to="/Cart"
                     class="group inline-flex flex-col items-center justify-center border-x border-gray-200 px-5 hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-800"
                     @click="!this.auth.cashier && this.tabClick.checkActiveTable()"
@@ -158,47 +158,47 @@
                     ]"
                     >Order</span
                     >
-                </router-link>
+                </router-link> -->
                 
                 <router-link
                     :to="invoiceData.invoiceUpdating ? '#' : '/recentOrder'"
                     v-if="this.auth.cashier"
-                    class="group inline-flex flex-col items-center justify-center border-x border-gray-200 px-5 hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-800"
+                    class="group inline-flex flex-col items-center justify-center border-x border-gray-200 px-1 hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-800"
                 >
                     <svg
-                    class="h-5 w-5"
-                    :class="[
-                        {
-                        'text-gray-500': this.tabClick.currentTab !== '/recentOrder',
-                        'text-blue-600': this.tabClick.currentTab === '/recentOrder',
-                        },
-                    ]"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
+                        class="h-5 w-5"
+                        :class="[
+                            {
+                            'text-gray-500': this.tabClick.currentTab !== '/recentOrder',
+                            'text-blue-600': this.tabClick.currentTab === '/recentOrder',
+                            },
+                        ]"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
                     >
-                    <path
-                        d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2Zm-3 15H4.828a1 1 0 0 1 0-2h6.238a1 1 0 0 1 0 2Zm0-4H4.828a1 1 0 0 1 0-2h6.238a1 1 0 1 1 0 2Z"
-                    />
-                    <path
-                        d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"
-                    />
+                        <path
+                            d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2Zm-3 15H4.828a1 1 0 0 1 0-2h6.238a1 1 0 0 1 0 2Zm0-4H4.828a1 1 0 0 1 0-2h6.238a1 1 0 1 1 0 2Z"
+                        />
+                        <path
+                            d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"
+                        />
                     </svg>
 
                     <span
-                    class="text-sm"
-                    :class="[
-                        {
-                        'text-gray-500': this.tabClick.currentTab !== '/recentOrder',
-                        'text-blue-600': this.tabClick.currentTab === '/recentOrder',
-                        },
-                    ]"
-                    >OrderLog</span
+                        class="text-sm"
+                        :class="[
+                            {
+                            'text-gray-500': this.tabClick.currentTab !== '/recentOrder',
+                            'text-blue-600': this.tabClick.currentTab === '/recentOrder',
+                            },
+                        ]"
+                    >سجل الطلبات</span
                     >
                 </router-link>
             </div>
-            <div></div>
+            <div class="col-span-1"></div>
         </div>
   </div>
 </template>

@@ -10,9 +10,6 @@
     "copy-html-entry": "cp ../ury_pos/public/urypos/index.html ../ury_pos/www/urypos.html"
   },
   "dependencies": {
-    "socket.io-client": "^4.5.1",
-    "vue": "^3.3.4",
-    "vue-router": "^4",
     "@syncfusion/ej2-vue-calendars": "^22.2.10",
     "axios": "^1.3.4",
     "flowbite": "^1.6.5",
@@ -23,8 +20,12 @@
     "pinia": "^2.0.35",
     "pnpm": "^7.33.6",
     "qz-tray": "^2.2.2",
+    "socket.io-client": "^4.5.1",
+    "vue": "^3.3.4",
     "vue-datepicker": "^1.3.0",
-    "vue-datepicker-next": "^1.0.3"
+    "vue-datepicker-next": "^1.0.3",
+    "vue-router": "^4",
+    "vue3-perfect-scrollbar": "^2.0.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",

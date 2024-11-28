@@ -1,17 +1,17 @@
 <template>
-        <div class="grid grid-cols-1 lg:grid-cols-12 md:grid-cols-12 gap-2">
+        <div class="grid grid-cols-1 lg:grid-cols-12 md:grid-cols-12 gap-2 border-b">
             <div
                 :class="[
-                    'relative border p-3',
-                    !this.auth.cashier ? 'lg:col-span-11 md:col-span-11' : 'lg:col-span-10 md:col-span-10'
+                    'relative p-2',
+                    !this.auth.cashier ? 'lg:col-span-11 md:col-span-11' : 'lg:col-span-9 md:col-span-9'
                 ]"
             >
-                <label
+                <!-- <label
                     for="room"
-                    class="absolute left-4 -top-2 bg-white px-2 text-xs text-gray-600"
+                    class="absolute right-4 -top-2 bg-white px-2 text-xs text-gray-600"
                 >
-                    Select Room
-                </label>
+                    حدد صالة أو جناح
+                </label> -->
                 <div
                     class="flex flex-wrap gap-4"
                 >
@@ -35,7 +35,7 @@
                 class="relative ml-1 mb-3 mt-2 inline-block h-10 w-28 cursor-pointer rounded bg-blue-700 lg:col-span-1 md:col-span-1"
             >
                 <span
-                    class="absolute w-full py-2 text-base text-white"
+                    class="absolute w-full py-2 px-2 text-base text-white"
                     :class="this.table.tableTypeClass"
                 >
                     {{ this.table.tableTypeLabel }}
@@ -48,14 +48,14 @@
                 </div>
             </div>
 
-            <div class="flex flex-col justify-center items-center lg:col-span-2 md:col-span-2 border p-2" v-if="this.auth.cashier">
-                <div class="relative w-full">
+            <div class="grid justify-center items-start lg:col-span-3 md:col-span-3 p-2" :class="[this.menu.selectedOrderType === 'Aggregators' ? 'grid-cols-2' : 'grid-cols-1']" v-if="this.auth.cashier">
+                <div class="relative ml-2">
                     <div class="relative">
                         <label
                             for="first"
-                            class="absolute left-4 -top-1 z-10 bg-white px-2 text-xs text-gray-600"
+                            class="absolute right-4 -top-1 z-10 bg-white px-2 text-xs text-gray-600"
                         >
-                            Order Type
+                            نوع الطلب
                         </label>
                         <select
                             class="relative mt-2 w-full rounded border border-gray-300 bg-gray-50"
@@ -74,12 +74,12 @@
                         </select>
                     </div>
                 </div>
-                <div class="relative w-full" v-if="this.menu.selectedOrderType === 'Aggregators'">
+                <div class="relative" v-if="this.menu.selectedOrderType === 'Aggregators'">
                     <label
                         for="first"
-                        class="absolute left-4 -top-1 z-10 bg-white px-2 text-xs text-gray-600"
+                        class="absolute right-4 -top-1 z-10 bg-white px-2 text-xs text-gray-600"
                     >
-                        Aggregators List
+                        Aggregators قائمة
                     </label>
                     <select
                         class="relative mt-2 w-full rounded border border-gray-300 bg-gray-50"
@@ -100,20 +100,20 @@
             </div>
         </div>
 
-        <div v-if="!this.table.isTakeaeay" class="m-auto mt-2 py-2">
+        <div v-if="!this.table.isTakeaeay" class="m-auto mt-1 py-1">
             <div class="flow-root">
                 <div
                     class="fixed inset-0 z-50 flex items-center justify-center bg-gray-300 bg-opacity-50 text-lg"
                     v-if="this.invoiceData.isPrinting"
                 >
-                    Printing Invoice
+                    طباعة الفاتورة
                 </div>
                 <div class="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8">
                     <div
                         w-full
                         class="w-full max-w-sm rounded border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800"
                         v-for="table in auth.cashier
-                            ? this.table.tables
+                            ? this.table.filteredTables
                             : this.table.filteredTables"
                         :key="table.name"
                     >
@@ -164,7 +164,7 @@
                                         href="#"
                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
                                         @click="this.table.showModal = true"
-                                        >Table Transfer</a
+                                        >تغيير الطاولة</a
                                         >
                                     </li>
                                     <li v-if="this.auth.hasAccess">
@@ -172,7 +172,7 @@
                                         href="#"
                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
                                         @click="this.table.showModalCaptainTransfer = true"
-                                        >Captain Transfer</a
+                                        >تغيير الكابتن</a
                                         >
                                     </li>
                                     </ul>
@@ -218,20 +218,21 @@
                                         this.table.addToSelectedTables(table)
                                     "
                                 >
-                                    Open Table
+                                    حجز طاولة  
                                     <svg
-                                    class="ml-2 h-6 w-6 dark:text-white"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg"
+                                        class="mr-2 h-6 w-6 dark:text-white"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        transform="scale(-1, 1)"
                                     >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                                    ></path>
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                                        ></path>
                                     </svg>
                                 </button>
                             </div>
@@ -241,19 +242,18 @@
                                     class="mb-2 me-2 inline-flex items-center rounded bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#2557D6]/90 focus:outline-none focus:ring-4 focus:ring-[#2557D6]/50 dark:focus:ring-[#2557D6]/50"
                                     @click="this.invoiceData.billing(table)"
                                 >
+                                    الفاتورة
                                     <svg
-                                    class="svg-icon mr-2"
-                                    viewBox="0 0 24 24"
-                                    width="18"
-                                    height="18"
-                                    fill="white"
+                                        class="svg-icon mr-2"
+                                        viewBox="0 0 24 24"
+                                        width="18"
+                                        height="18"
+                                        fill="white"
                                     >
-                                    <path
-                                        d="M6 19H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h3V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v4h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-3v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-2zm0-2v-1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1h2V9H4v8h2zM8 4v3h8V4H8zm0 13v3h8v-3H8zm-3-7h3v2H5v-2z"
-                                    />
+                                        <path
+                                            d="M6 19H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h3V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v4h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-3v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-2zm0-2v-1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1h2V9H4v8h2zM8 4v3h8V4H8zm0 13v3h8v-3H8zm-3-7h3v2H5v-2z"
+                                        />
                                     </svg>
-
-                                    Bill
                                 </button>
 
                                 <div

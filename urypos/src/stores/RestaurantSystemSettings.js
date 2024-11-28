@@ -14,14 +14,14 @@ export const useRestaurantSystemSettings = defineStore("restaurant_system_settin
             return this.restaurant_system_settings;
         },
     },
-    actions: {    
+    actions: {
         async fetch_restaurant_system_settings() {
             await this.call.get("ury.ury_pos.api.getRestaurantSystemSettings").then((result) => {
                 this.restaurant_system_settings = result.message;
             })
-            .catch((error) => {
-                console.error("Error fetching restaurant system settings:", error);
-            });
+                .catch((error) => {
+                    console.error("Error fetching restaurant system settings:", error);
+                });
         },
-  },
+    },
 });

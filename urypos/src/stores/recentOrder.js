@@ -76,7 +76,7 @@ export const usetoggleRecentOrder = defineStore("recentOrders", {
         let orderNo = this.draftInvoice || this.invoiceData.invoiceNumber;
         return orderNo;
       } else {
-        return "New";
+        return "جديد";
       }
     },
   },
